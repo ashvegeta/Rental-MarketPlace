@@ -9,3 +9,5 @@ Basic marketplace platform for rentals
 ## Setup
 
 ## Implementation
+
+## Future Scope
