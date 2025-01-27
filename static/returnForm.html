@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rent Product</title>
+    <title>Return Product</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -38,24 +38,19 @@
 </head>
 
 <body>
-    <h1>Rent Product</h1>
+    <h1>Return Product</h1>
     <h3><a href="http://localhost:3000">
             < Home</a>
     </h3>
 
-    <form id="rentalForm">
-        <input type="hidden" id="PID" name="PID" value="">
-
+    <form id="returnForm">
         <label for="UID">User ID (UID):</label>
         <input type="text" id="UID" name="UID" required>
 
-        <label for="startDate">Start Date (mm-dd-yyyy HH:MM:SS):</label>
-        <input type="text" id="startDate" name="startDate" required>
+        <label for="PID">Product ID (PID):</label>
+        <input type="text" id="PID" name="PID" required>
 
-        <label for="endDate">End Date (mm-dd-yyyy HH:MM:SS):</label>
-        <input type="text" id="endDate" name="endDate" required>
-
-        <button type="submit">Rent</button>
+        <button type="submit">Return</button>
     </form>
 
     <script>
@@ -66,21 +61,19 @@
             document.getElementById('PID').value = PID;
 
             // Handle form submission
-            document.getElementById('rentalForm').addEventListener('submit', async function (event) {
+            document.getElementById('returnForm').addEventListener('submit', async function (event) {
                 event.preventDefault(); // Prevent the default form submission
 
                 const UID = document.getElementById('UID').value;
                 const PID = document.getElementById('PID').value;
-                const startDate = document.getElementById('startDate').value;
-                const endDate = document.getElementById('endDate').value;
 
                 try {
-                    const response = await fetch('http://localhost:3000/rental/rent', {
+                    const response = await fetch('http://localhost:3000/rental/return', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({ UID, PID, startDate, endDate })
+                        body: JSON.stringify({ UID, PID })
                     });
 
                     const message = await response.text();

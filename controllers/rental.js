@@ -19,7 +19,7 @@ const listRentalItem = (req, res) => {
   saveData();
 
   // Return result
-  return res.json({ PID: newID, ...newItem });
+  return res.send(`a new produce with PID : ${newID} created`);
 };
 
 // Fetch all rental items
@@ -34,8 +34,6 @@ const getAllRentalItems = (req, res) => {
 // Rent a product
 const rentProduct = (req, res) => {
   const { PID, UID, startDate, endDate } = req.body;
-
-  console.log(req);
 
   // Check whether input parameters meet requirements
   if (!UID || !PID) {
@@ -106,7 +104,7 @@ const returnProduct = (req, res) => {
           .send("You are not the current renter of this product.");
       }
     } else {
-      return res.status(400).send("Product is not currently rented.");
+      return res.status(400).send("Product is currently not rented.");
     }
   } else {
     return res.status(404).send("Requested product unavailable.");

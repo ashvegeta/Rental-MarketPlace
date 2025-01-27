@@ -1,26 +1,71 @@
 {
-  "pid-1737854677427-910333300": {
-    "prodName": "prod1",
-    "desc": "a product",
-    "pricePerDay": 5,
-    "availability": false,
-    "RentedInfo": {
-      "UID": "uid-12345",
-      "startDate": "01-26-2025 17:25:00",
-      "endDate": "02-02-2025 01:01:01"
-    }
+  "pid-1738000000001-321456789": {
+    "prodName": "Cordless Drill",
+    "desc": "A portable cordless drill for home repairs",
+    "pricePerDay": 4,
+    "availability": true,
+    "RentedInfo": null
   },
-  "pid-1737861459269-795988000": {
-    "prodName": "drill machine",
-    "desc": "drilling machine",
+  "pid-1738000000002-654987321": {
+    "prodName": "Action Camera",
+    "desc": "A compact action camera for recording adventures",
+    "pricePerDay": 6,
+    "availability": true,
+    "RentedInfo": null
+  },
+  "pid-1738000000003-789654123": {
+    "prodName": "Electric Guitar",
+    "desc": "A six-string electric guitar for music enthusiasts",
+    "pricePerDay": 8,
+    "availability": true,
+    "RentedInfo": null
+  },
+  "pid-1738000000004-123789654": {
+    "prodName": "Camping Tent",
+    "desc": "A two-person camping tent for outdoor trips",
+    "pricePerDay": 5,
+    "availability": true,
+    "RentedInfo": null
+  },
+  "pid-1738000000005-456321987": {
+    "prodName": "VR Headset",
+    "desc": "A virtual reality headset for immersive gaming",
+    "pricePerDay": 9,
+    "availability": true,
+    "RentedInfo": null
+  },
+  "pid-1738000000006-987456123": {
+    "prodName": "Portable Projector",
+    "desc": "A mini projector for movie nights and presentations",
+    "pricePerDay": 7,
+    "availability": true,
+    "RentedInfo": null
+  },
+  "pid-1738000000007-741852963": {
+    "prodName": "Electric Kettle",
+    "desc": "A fast-boiling electric kettle for making tea or coffee",
     "pricePerDay": 3,
     "availability": true,
     "RentedInfo": null
   },
-  "pid-1737915824178-46421800": {
-    "prodName": "gaming laptop",
-    "desc": "a laptop for laptop",
-    "pricePerDay": 7,
+  "pid-1738000000008-852963741": {
+    "prodName": "Fitness Tracker",
+    "desc": "A wearable fitness tracker to monitor health metrics",
+    "pricePerDay": 5,
+    "availability": true,
+    "RentedInfo": null
+  },
+  "pid-1738000000009-963741852": {
+    "prodName": "Binoculars",
+    "desc": "A lightweight pair of binoculars for birdwatching",
+    "pricePerDay": 4,
+    "availability": true,
+    "RentedInfo": null
+  },
+  "pid-1738000000010-159357456": {
+    "prodName": "Bluetooth Speaker",
+    "desc": "A portable Bluetooth speaker with powerful sound",
+    "pricePerDay": 6,
     "availability": true,
     "RentedInfo": null
   }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rent Product</title>
+    <title>List New Item</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,7 +23,8 @@
             margin-bottom: 5px;
         }
 
-        input {
+        input,
+        textarea {
             width: 100%;
             padding: 8px;
             margin-bottom: 10px;
@@ -38,49 +39,44 @@
 </head>
 
 <body>
-    <h1>Rent Product</h1>
+    <h1>List New Item</h1>
     <h3><a href="http://localhost:3000">
             < Home</a>
     </h3>
 
-    <form id="rentalForm">
-        <input type="hidden" id="PID" name="PID" value="">
+    <form id="listItemForm">
+        <label for="prodName">Product Name:</label>
+        <input type="text" id="prodName" name="prodName" required>
 
-        <label for="UID">User ID (UID):</label>
-        <input type="text" id="UID" name="UID" required>
+        <label for="desc">Description:</label>
+        <textarea id="desc" name="desc" required></textarea>
 
-        <label for="startDate">Start Date (mm-dd-yyyy HH:MM:SS):</label>
-        <input type="text" id="startDate" name="startDate" required>
+        <label for="pricePerDay">Price Per Day:</label>
+        <input type="number" id="pricePerDay" name="pricePerDay" required>
 
-        <label for="endDate">End Date (mm-dd-yyyy HH:MM:SS):</label>
-        <input type="text" id="endDate" name="endDate" required>
+        <input type="checkbox" id="availability" name="availability" checked hidden>
 
-        <button type="submit">Rent</button>
+        <button type="submit">List Item</button>
     </form>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Get PID from URL query parameters and set it to the hidden input
-            const urlParams = new URLSearchParams(window.location.search);
-            const PID = urlParams.get('PID');
-            document.getElementById('PID').value = PID;
-
             // Handle form submission
-            document.getElementById('rentalForm').addEventListener('submit', async function (event) {
+            document.getElementById('listItemForm').addEventListener('submit', async function (event) {
                 event.preventDefault(); // Prevent the default form submission
 
-                const UID = document.getElementById('UID').value;
-                const PID = document.getElementById('PID').value;
-                const startDate = document.getElementById('startDate').value;
-                const endDate = document.getElementById('endDate').value;
+                const prodName = document.getElementById('prodName').value;
+                const desc = document.getElementById('desc').value;
+                const pricePerDay = document.getElementById('pricePerDay').value;
+                const availability = document.getElementById('availability').checked;
 
                 try {
-                    const response = await fetch('http://localhost:3000/rental/rent', {
+                    const response = await fetch('http://localhost:3000/rental/list', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({ UID, PID, startDate, endDate })
+                        body: JSON.stringify({ prodName, desc, pricePerDay, availability })
                     });
 
                     const message = await response.text();

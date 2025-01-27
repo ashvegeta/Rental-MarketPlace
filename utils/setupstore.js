@@ -1,4 +1,3 @@
-// create necessary folders and sub-folders for in-memory storage (JSON)
 const fs = require("fs");
 const path = require("path");
 
@@ -26,7 +25,6 @@ try {
 
 // Save data back to the file
 function saveData() {
-  console.log(rentalsFile);
   fs.writeFile(rentalsFile, JSON.stringify(rentalData, null, 2), (err) => {
     if (err) {
       console.error("Error saving rental data:", err.message);
@@ -34,6 +32,30 @@ function saveData() {
   });
 }
 
+// Function to check for expired items
+function checkForExpiredItems() {
+  const now = new Date();
+  let expiredItems = false;
+
+  for (const PID in rentalData) {
+    const product = rentalData[PID];
+
+    if (product.RentedInfo) {
+      const endDate = new Date(product.RentedInfo.endDate);
+      if (endDate <= now) {
+        product.availability = true;
+        product.RentedInfo = null;
+        expiredItems = true;
+      }
+    }
+  }
+
+  if (expiredItems) {
+    saveData();
+    console.log("Expired items have been updated.");
+  }
+}
+
 console.log("storage setup is done .....");
 
-module.exports = { rentalData, saveData };
+module.exports = { rentalData, saveData, checkForExpiredItems };
