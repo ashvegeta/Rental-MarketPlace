@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental Marketplace</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .search-bar {
+            margin-bottom: 20px;
+        }
+
+        .itemList {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .item {
+            border: 5px solid #ddd;
+            padding: 10px;
+            width: 40%;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+        }
+
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        button.disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Rental Marketplace</h1>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search products..." oninput="filterItems()"
+            style="padding: 3px; width : 200px; min-height: 25px;">
+    </div>
+    <div class="itemList"></div>
+
+    <script>
+        const API_BASE_URL = "http://localhost:3000"; // Update with your API URL
+        let allItems = [];
+
+        // Fetch items from the backend
+        async function fetchItems() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/rental/getall`);
+                if (response.ok) {
+                    allItems = await response.json();
+                    renderItems(allItems);
+                } else {
+                    console.error("Failed to fetch items.");
+                }
+            } catch (error) {
+                console.error("Error fetching items:", error);
+            }
+        }
+
+        // Render items
+        function renderItems(items) {
+            const itemList = document.getElementsByClassName("itemList")[0];
+            itemList.innerHTML = ""; // Clear the list
+
+            items.forEach((item) => {
+                const itemDiv = document.createElement("div");
+                itemDiv.className = `item`;
+                itemDiv.innerHTML = `
+                    <div>
+                        <p><strong>PID:</strong> ${item.PID}</p>
+                        <p><strong>Name:</strong> ${item.prodName}</p>
+                        <p><strong>Description:</strong> ${item.desc}</p>
+                        <p><strong>Price/Day:</strong> $${item.pricePerDay}</p>
+                        <p><strong>Availability:</strong> ${item.availability ? "Yes" : "No"}</p>
+                    </div>
+                    <button ${item.availability ? "" : "disabled"} 
+                        onclick="rentItem('${item.PID}')">
+                        ${item.availability ? "Rent" : "Unavailable"}
+                    </button>
+                `;
+
+
+                itemList.appendChild(itemDiv);
+            });
+        }
+
+        // Rent an item
+        function rentItem(PID) {
+            // Forward to rentalForm page with PID as query parameter
+            window.location.href = `rentalForm.html?PID=${PID}`;
+        }
+
+        // Filter items based on the search input
+        async function filterItems() {
+            const query = document.getElementById("searchInput").value.toLowerCase();
+
+            if (query == "") {
+                renderItems(allItems);
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/search?name=${query}`);
+                if (response.ok) {
+                    const filteredItems = await response.json();
+                    renderItems(filteredItems);
+                } else {
+                    console.error("Failed to fetch search results.");
+                }
+            } catch (error) {
+                console.error("Error fetching search results:", error);
+            }
+        }
+
+        // Fetch items on page load
+        fetchItems();
+    </script>
+</body>
+
+</html>

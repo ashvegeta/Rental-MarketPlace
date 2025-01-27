@@ -1,0 +1,27 @@
+{
+  "pid-1737854677427-910333300": {
+    "prodName": "prod1",
+    "desc": "a product",
+    "pricePerDay": 5,
+    "availability": false,
+    "RentedInfo": {
+      "UID": "uid-12345",
+      "startDate": "01-26-2025 17:25:00",
+      "endDate": "02-02-2025 01:01:01"
+    }
+  },
+  "pid-1737861459269-795988000": {
+    "prodName": "drill machine",
+    "desc": "drilling machine",
+    "pricePerDay": 3,
+    "availability": true,
+    "RentedInfo": null
+  },
+  "pid-1737915824178-46421800": {
+    "prodName": "gaming laptop",
+    "desc": "a laptop for laptop",
+    "pricePerDay": 7,
+    "availability": true,
+    "RentedInfo": null
+  }
+}

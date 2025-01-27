@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+
+        form {
+            display: inline-block;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Rent Product</h1>
+    <h3><a href="http://localhost:3000">
+            < Home</a>
+    </h3>
+
+    <form id="rentalForm" action="http://localhost:3000/rental/rent" method="POST">
+        <input type="hidden" id="PID" name="PID" value="">
+
+        <label for="UID">User ID (UID):</label>
+        <input type="text" id="UID" name="UID" required>
+
+        <label for="startDate">Start Date (mm-dd-yyyy HH:MM:SS):</label>
+        <input type="text" id="startDate" name="startDate" required>
+
+        <label for="endDate">End Date (mm-dd-yyyy HH:MM:SS):</label>
+        <input type="text" id="endDate" name="endDate" required>
+
+        <button type="submit">Rent</button>
+    </form>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get PID from URL query parameters and set it to the hidden input
+            const urlParams = new URLSearchParams(window.location.search);
+            const PID = urlParams.get('PID');
+            document.getElementById('PID').value = PID;
+        });
+    </script>
+</body>
+
+</html>

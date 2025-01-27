@@ -22,9 +22,20 @@ const listRentalItem = (req, res) => {
   return res.json({ PID: newID, ...newItem });
 };
 
+// Fetch all rental items
+const getAllRentalItems = (req, res) => {
+  const items = Object.keys(rentalData).map((PID) => ({
+    PID,
+    ...rentalData[PID],
+  }));
+  return res.json(items);
+};
+
 // Rent a product
 const rentProduct = (req, res) => {
   const { PID, UID, startDate, endDate } = req.body;
+
+  console.log(req);
 
   // Check whether input parameters meet requirements
   if (!UID || !PID) {
@@ -104,6 +115,7 @@ const returnProduct = (req, res) => {
 
 module.exports = {
   listRentalItem,
+  getAllRentalItems,
   rentProduct,
   returnProduct,
 };
